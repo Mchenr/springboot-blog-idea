@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://D:/programming_devolopment/java/maven/maven-repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://D:/programming_devolopment/java/maven/maven-repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://D:/programming_devolopment/java/maven/maven-repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-sources.jar!/" />
     </SOURCES>

@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://D:/programming_devolopment/java/maven/maven-repository/org/yaml/snakeyaml/1.25/snakeyaml-1.25.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://D:/programming_devolopment/java/maven/maven-repository/org/yaml/snakeyaml/1.25/snakeyaml-1.25-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://D:/programming_devolopment/java/maven/maven-repository/org/yaml/snakeyaml/1.25/snakeyaml-1.25-sources.jar!/" />
     </SOURCES>
