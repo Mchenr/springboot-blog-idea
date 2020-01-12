@@ -14,8 +14,6 @@ logging:
   level:
     root: warn
     com.chenj: info
-  file:
-    name: blog-pro
-    path: log
+  file: log/blog-pro.log
 server:
   port: 8081

@@ -14,6 +14,4 @@ logging:
   level:
     root: info
     com.chenj: debug
-  file:
-    name: blog-dev
-    path: log
+  file: log/blog-dev.log

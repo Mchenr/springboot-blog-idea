@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <title>404</title>
 </head>
 <body>
-<h1>404</h1>
+<div class="m-container-small">
+    <div class="ui container">
+        <div class="ui error message">
+            <h1>404</h1>
+            <p>你访问的资源不存在</p>
+        </div>
+    </div>
+</div>
+
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
 </body>
 </html>
