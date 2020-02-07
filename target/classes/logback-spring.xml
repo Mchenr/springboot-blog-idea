@@ -2,6 +2,7 @@
 <configuration>
     <!--包含Spring boot对logback日志的默认配置-->
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <springProperty scope="context" name="logging.file.path" source="logging.file.path"/>
     <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
@@ -11,9 +12,9 @@
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
-        <file>${LOG_FILE}</file>
+
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>${logging.file.path}/blog-dev.%d{yyyy-MM-dd}.%i</fileNamePattern>
             <!--保留历史日志一个月的时间-->
             <maxHistory>30</maxHistory>
             <!--

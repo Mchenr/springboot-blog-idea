@@ -39,8 +39,9 @@
                         </div>
                         <button class="ui fluid large teal submit button">登录</button>
                     </div>
-
+                    <!--非空验证信息-->
                     <div class="ui error message"></div>
+                    <!--用户名密码错误信息-->
                     <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
                 </form>
             </div>
