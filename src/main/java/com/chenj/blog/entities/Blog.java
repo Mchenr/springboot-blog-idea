@@ -30,6 +30,11 @@ public class Blog {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
+    @Transient
+    private Long typeId;
+
+    private String tagIds;
+
     @ManyToOne
     private Type type;
 
