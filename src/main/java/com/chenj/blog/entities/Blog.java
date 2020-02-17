@@ -19,6 +19,7 @@ public class Blog {
     private String content;
     private String firstPicture;
     private String articleFlag;
+    private String description;
     private Integer viewTimes;
     private boolean appreciation;
     private boolean shareStatement;

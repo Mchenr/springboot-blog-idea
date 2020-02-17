@@ -39,8 +39,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="teal active item">列表</a>
+            <a href="#" th:href="@{/admin/blogs/input}" class="item">发布</a>
+            <a href="#" th:href="@{/admin/blogs}" class="teal active item">列表</a>
         </div>
     </div>
 </div>
@@ -48,7 +48,7 @@
 <!--中间内容-->
 <div class="m-container-small m-padded-tb-huge">
     <div class="ui container">
-        <div class="ui segment form">
+        <div class="ui secondary segment form">
             <input type="hidden" name="page">
             <div class="ui inline fields">
                 <div class="field">
@@ -79,9 +79,9 @@
             </div>
         </div>
         <div id="table-container">
-            <table th:fragment="blogList" class="ui celled teal table">
+            <table th:fragment="blogList" class="ui compact striped teal table">
                 <thead>
-                <tr>
+                <tr class="single line">
                     <th></th>
                     <th>标题</th>
                     <th>类型</th>
@@ -109,7 +109,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="6">
+                    <th colspan="7">
                         <div class="ui mini pagination menu" th:if="${page.totalPages} gt '1'">
                             <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}"
                                class="item">上一页</a>
