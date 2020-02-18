@@ -76,7 +76,7 @@
             <tfoot>
             <tr>
                 <th colspan="6">
-                    <div class="ui mini pagination menu" th:if="${totalNumber} != null">
+                    <div class="ui mini pagination menu" th:if="${page.totalPages} gt '1'">
                         <a class="item" th:href="@{/admin/types(page=${page.number}-1)}" th:unless="${page.first}">上一页</a>
                         <a class="item" th:href="@{/admin/types(page=${page.number}+1)}" th:unless="${page.last}">下一页</a>
                     </div>
