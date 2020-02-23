@@ -4,6 +4,7 @@ import com.chenj.blog.NotFoundException;
 import com.chenj.blog.dao.BlogRepository;
 import com.chenj.blog.entities.Blog;
 import com.chenj.blog.entities.Type;
+import com.chenj.blog.util.MarkdownUtils;
 import com.chenj.blog.util.MyBeanUtils;
 import com.chenj.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -16,13 +17,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.criteria.*;
+import java.util.*;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -59,6 +55,17 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Page<Blog> listBlogByTagId(Pageable pageable, Long tagId) {
+        return blogRepository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Join join = root.join("tags");
+                return criteriaBuilder.equal(join.get("id"), tagId);
+            }
+        }, pageable);
+    }
+
+    @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
     }
@@ -68,6 +75,29 @@ public class BlogServiceImpl implements BlogService {
         Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
         Pageable pageable = PageRequest.of(0, size, sort);
         return blogRepository.findTop(pageable);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archiveBlog() {
+        List<String> years = blogRepository.findGroupYear();
+        Map<String, List<Blog>> map = new LinkedHashMap<>();
+        for (String year : years){
+            map.put(year, blogRepository.findBlogByYear(year));
+        }
+        return map;
+    }
+
+    @Override
+    public Blog getAndInvertBlog(Long id) {
+        Blog blog = blogRepository.getOne(id);
+        if (blog == null){
+            throw new NotFoundException("该博客不存在");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        String content = b.getContent();
+        b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return b;
     }
 
     @Override
@@ -99,9 +129,19 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(b);
     }
 
+    @Override
+    public Long countBlog() {
+        return (long) blogRepository.findAll().size();
+    }
+
     @Transactional
     @Override
     public void deleteBlog(Long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public int updateBlogView(Long id) {
+        return blogRepository.updateView(id);
     }
 }

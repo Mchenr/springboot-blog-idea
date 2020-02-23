@@ -17,16 +17,19 @@
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">Blog</h2>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${1==n} ? 'active'"><i class="small home icon"></i>首页</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${2==n} ? 'active'"><i class="small idea outline icon"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${3==n} ? 'active'"><i class="small tags icon"></i>标签</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${4==n} ? 'active'"><i class="small copy outline icon"></i>归档</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${5==n} ? 'active'"><i class="small info icon"></i>关于我</a>
+                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${1==n} ? 'active'"><i class="small home icon"></i>首页</a>
+                <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${2==n} ? 'active'"><i class="small idea outline icon"></i>分类</a>
+                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${3==n} ? 'active'"><i class="small tags icon"></i>标签</a>
+                <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${4==n} ? 'active'"><i class="small copy outline icon"></i>归档</a>
+                <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${5==n} ? 'active'"><i class="small info icon"></i>关于我</a>
                 <div class="right m-item item m-mobile-hide">
-                    <div class="ui icon input">
-                        <input type="text" placeholder="search...">
-                        <i class="search link icon"></i>
-                    </div>
+                    <form action="#" name="search" th:action="@{/search}" method="post">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="search..." name="query" th:value="${query}">
+                            <i onclick="document.search.submit()" class="search link icon"></i>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -46,10 +49,10 @@
                 </div>
                 <div class="three wide column">
                     <h4 class="ui inverted header m-opacity-mini m-text-spaced m-text-thin">最新博客</h4>
-                    <div class="ui inverted link list">
-                        <a href="#" class="item m-text-spaced">用户故事（User Story）</a>
-                        <a href="#" class="item m-text-spaced">用户故事（User Story）</a>
-                        <a href="#" class="item m-text-spaced">用户故事（User Story）</a>
+                    <div id="newBlog-container">
+                        <div class="ui inverted link list" th:fragment="newBlogList">
+                            <a href="#" target="_blank" th:each="blog : ${newblogs}" th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}" class="item m-text-spaced">用户故事（User Story）</a>
+                        </div>
                     </div>
                 </div>
                 <div class="three wide column">
@@ -79,6 +82,9 @@
     <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
     <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
     <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+    <script th:inline="javascript">
+        $('#newBlog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+    </script>
 </th:block>
 
 </body>
