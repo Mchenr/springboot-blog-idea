@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://39.106.78.19:3306/blog?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
-    password: chenjiaxun2@
+    password: chenjiaxun2@163
 
   jpa:
     hibernate:
@@ -16,4 +16,4 @@ logging:
     com.chenj: info
   file: log/blog-pro.log
 server:
-  port: 8081
+  port: 8082
